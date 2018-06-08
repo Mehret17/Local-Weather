@@ -10,6 +10,7 @@ const domString = (weatherArray) => {
   strang +=   `<h3>${weatherArray.main.pressure} mp</h3>`;
   strang +=   `<h3>${weatherArray.wind.speed}  mph</h3>`;
   strang +=   `<h2>${weatherArray.name}</h2>`;
+  strang +=   `<a class="btn btn-primary updateMovieToWatched" role="button">Save</a>`;
   strang += `</div>`;
   strang += `</div>`;
   strang += `</div>`;
@@ -18,7 +19,7 @@ const domString = (weatherArray) => {
 };
 
 const printToDom = (stringz) => {
-  $('#weatherContainer').append(stringz);
+  $('#currentForecast').append(stringz);
 };
 
 const fiveDayString = (weatherArray) => {
@@ -26,29 +27,61 @@ const fiveDayString = (weatherArray) => {
   weatherArray.forEach((weather, index) => {
     console.log('index:',index);
     if (index % 8 === 0) {
+      fiveDayStrang += `<div class="container">`;
       fiveDayStrang += `<div class="row text-center">`;
-      fiveDayStrang += `<div class="col-sm-6 col-md-4">`;
-      // fiveDayStrang += `<div class='thumbnail">`;
+      fiveDayStrang += `<div class="col-xs-6 col-md-3>`;
+      fiveDayStrang += `<div class='thumbnail forecast">`;
       // fiveDayStrang += `<div class="caption">`;
-      fiveDayStrang +=   `<h4>Temperature: ${weather.main.temp} °F</h4>`;
-      fiveDayStrang +=   `<h3>${weather.weather[0].description}</h3>`;
-      fiveDayStrang +=   `<h3>${weather.main.pressure} mp</h3>`;
-      fiveDayStrang +=   `<h3>${weather.wind.speed}  mph</h3>`;
+      fiveDayStrang +=   `<h4 class ="temperature">Temperature: ${weather.main.temp} °F</h4>`;
+      fiveDayStrang +=   `<h3 class ="description">${weather.weather[0].description}</h3>`;
+      fiveDayStrang +=   `<h3 class ="pressure">${weather.main.pressure} mp</h3>`;
+      fiveDayStrang +=   `<h3 class ="windSpeed">${weather.wind.speed}  mph</h3>`;
       // fiveDayStrang +=   `<h2>${weather.city.name}</h2>`;
+      fiveDayStrang +=   `<a class="btn btn-primary saveWeather" role="button">Save</a>`;
       fiveDayStrang += `</div>`;
       fiveDayStrang += `</div>`;
-      // fiveDayStrang += `</div>`;
-      // fiveDayStrang += `</div>`;
+      fiveDayStrang += `</div>`;
+      fiveDayStrang += `</div>`;
     };
   });
   print(fiveDayStrang);
 };
 
 const print = (allStringz) => {
-  $('#weatherContainer').append(allStringz);
+  $('#fiveDayForecast').html(allStringz);
+};
+
+const saveString = (weatherArray) => {
+  let saveString = '';
+  weatherArray.forEach((weather, index) => {
+    console.log('index:',index);
+    if (index % 8 === 0) {
+      saveString += `<div class="container">`;
+      saveString += `<div class="row text-center">`;
+      saveString += `<div class="col-xs-6 col-md-3>`;
+      saveString += `<div class='thumbnail forecast">`;
+      // fiveDayStrang += `<div class="caption">`;
+      saveString +=   `<h4 class ="temperature">Temperature: ${weather.main.temp} °F</h4>`;
+      saveString +=   `<h3 class ="description">${weather.weather[0].description}</h3>`;
+      saveString +=   `<h3 class ="pressure">${weather.main.pressure} mp</h3>`;
+      saveString +=   `<h3 class ="windSpeed">${weather.wind.speed}  mph</h3>`;
+      // fiveDayStrang +=   `<h2>${weather.city.name}</h2>`;
+      // saveString +=   `<a class="btn btn-primary saveWeather" role="button">Save</a>`;
+      saveString += `</div>`;
+      saveString += `</div>`;
+      saveString += `</div>`;
+      saveString += `</div>`;
+    };
+  });
+  printSave(saveString);
+};
+
+const printSave = (stringz) => {
+  $('#favoriteContainer').html(stringz);
 };
 
 module.exports = {
   domString,
   fiveDayString,
+  saveString,
 };
