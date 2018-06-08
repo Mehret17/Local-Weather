@@ -53,31 +53,27 @@ const print = (allStringz) => {
 
 const saveString = (weatherArray) => {
   let saveString = '';
-  weatherArray.forEach((weather, index) => {
-    console.log('index:',index);
-    if (index % 8 === 0) {
-      saveString += `<div class="container">`;
-      saveString += `<div class="row text-center">`;
-      saveString += `<div class="col-xs-6 col-md-3>`;
-      saveString += `<div class='thumbnail forecast">`;
-      // fiveDayStrang += `<div class="caption">`;
-      saveString +=   `<h4 class ="temperature">Temperature: ${weather.main.temp} °F</h4>`;
-      saveString +=   `<h3 class ="description">${weather.weather[0].description}</h3>`;
-      saveString +=   `<h3 class ="pressure">${weather.main.pressure} mp</h3>`;
-      saveString +=   `<h3 class ="windSpeed">${weather.wind.speed}  mph</h3>`;
-      // fiveDayStrang +=   `<h2>${weather.city.name}</h2>`;
-      // saveString +=   `<a class="btn btn-primary saveWeather" role="button">Save</a>`;
-      saveString += `</div>`;
-      saveString += `</div>`;
-      saveString += `</div>`;
-      saveString += `</div>`;
-    };
+  weatherArray.forEach((weather) => {
+    saveString += `<div class="container">`;
+    saveString += `<div class="row text-center">`;
+    saveString += `<div class="col-xs-6 col-md-3>`;
+    saveString += `<div class='thumbnail forecast">`;
+    // fiveDayStrang += `<div class="caption">`;
+    saveString +=   `<h4 class ="temperature">Temperature: ${weather.temp} °F</h4>`;
+    saveString +=   `<h3 class ="description">${weather.description}</h3>`;
+    saveString +=   `<h3 class ="pressure">${weather.pressure} mp</h3>`;
+    saveString +=   `<h3 class ="windSpeed">${weather.wind}  mph</h3>`;
+    // fiveDayStrang +=   `<h2>${weather.city.name}</h2>`;
+    saveString += `</div>`;
+    saveString += `</div>`;
+    saveString += `</div>`;
+    saveString += `</div>`;
   });
   printSave(saveString);
 };
 
 const printSave = (stringz) => {
-  $('#favoriteContainer').html(stringz);
+  $('#favoritesContainer').html(stringz);
 };
 
 module.exports = {

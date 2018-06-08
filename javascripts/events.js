@@ -1,5 +1,6 @@
 const openWeather = require('./openWeather');
 const firebaseApi = require('./firebaseApi');
+const dom = require('./dom');
 
 const myLinks = () => {
   $(document).click((e) => {
@@ -12,7 +13,7 @@ const myLinks = () => {
       $('#search').addClass('hide');
       $('#myFavorites').removeClass('hide');
       $('#authScreen').addClass('hide');
-      // getAllMoviesEvent();
+      getAllWeatherEvent();
     } else if (e.target.id === 'navSearch') {
       $('#myFavorites').addClass('hide');
       $('#search').removeClass('hide');
@@ -54,6 +55,16 @@ const fiveDayButtonEvent = () => {
       openWeather.showFiveDayForecast(searchWord);
     };
   });
+};
+
+const getAllWeatherEvent = () => {
+  firebaseApi.getAllWeather()
+    .then((weatherArray) => {
+      dom.saveString(weatherArray);
+    })
+    .catch((error) => {
+      console.error('error in get all weather', error);
+    });
 };
 
 const saveWeatherEvent = () => {
