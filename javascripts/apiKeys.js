@@ -1,4 +1,6 @@
 const openWeather = require('./openWeather');
+const firebaseApi = require('./firebaseApi');
+
 const apiKeys = () => {
   return new Promise ((resolve, reject) => {
     $.ajax('./db/apiKeys.json')
@@ -15,6 +17,7 @@ const retrieveKeys = () => {
   apiKeys()
     .then((results) => {
       openWeather.setKey(results.openWeather.apiKey);
+      firebaseApi.setConfig(results.firebase);
       firebase.initializeApp(results.firebase);
     })
     .catch((err) => {
