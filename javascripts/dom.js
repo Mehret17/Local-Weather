@@ -57,12 +57,13 @@ const saveString = (weatherArray) => {
     saveString += `<div class="container">`;
     saveString += `<div class="row text-center">`;
     saveString += `<div class="col-xs-6 col-md-3>`;
-    saveString += `<div class='thumbnail forecast">`;
+    saveString += `<div class='thumbnail forecast" data-firebase-id="${weather.id}">`;
     // fiveDayStrang += `<div class="caption">`;
     saveString +=   `<h4 class ="temperature">Temperature: ${weather.temp} °F</h4>`;
     saveString +=   `<h3 class ="description">${weather.description}</h3>`;
     saveString +=   `<h3 class ="pressure">${weather.pressure} mp</h3>`;
     saveString +=   `<h3 class ="windSpeed">${weather.wind}  mph</h3>`;
+    saveString +=   `<a class="btn-danger deleteWeather" role="button">Delete</a>`;
     // fiveDayStrang +=   `<h2>${weather.city.name}</h2>`;
     saveString += `</div>`;
     saveString += `</div>`;

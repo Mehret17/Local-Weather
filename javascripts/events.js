@@ -57,6 +57,21 @@ const fiveDayButtonEvent = () => {
   });
 };
 
+const saveWeatherEvent = () => {
+  $(document).on('click', '.saveWeather',(e) => {
+    console.log('saveWeather:',e);
+    const weatherToAddCard = $(e.target).closest('.forecast');
+    const weatherToAdd = {
+      temperature: weatherToAddCard.find('.temperature').text(),
+      condition: weatherToAddCard.find('.description').text(),
+      pressure: weatherToAddCard.find('.pressure').text(),
+      wind: weatherToAddCard.find('.windSpeed').text(),
+      isScarry: true,
+    };
+    firebaseApi.saveWeather(weatherToAdd);
+  });
+};
+
 const getAllWeatherEvent = () => {
   firebaseApi.getAllWeather()
     .then((weatherArray) => {
@@ -67,24 +82,17 @@ const getAllWeatherEvent = () => {
     });
 };
 
-const saveWeatherEvent = () => {
-  $(document).on('click', '.saveWeather',(e) => {
-    console.log('saveWeather:',e);
-    const weatherToAddCard = $(e.target).closest('.forecast');
-    const weatherToAdd = {
-      temperature: weatherToAddCard.find('.temperature').text(),
-      condition: weatherToAddCard.find('.description').text(),
-      pressure: weatherToAddCard.find('.pressure').text(),
-      wind: weatherToAddCard.find('.wind').text(),
-      isScarry: true,
-    };
-    firebaseApi.saveWeather(weatherToAdd);
-    // .then(() => {
-    //   weatherToAddCard.remove();
-    // })
-    // .catch((error) => {
-    //   console.error('error in saving weather', error);
-    // });
+const deleteWeatherFromFirebase = () => {
+  $(document).on('click', '.deleteWeather', (e) => {
+    const weatherToDeleteId = $(e.target).closest('.forecast').data('firebaseId');
+    console.log('deleteEvent:',e);
+    firebaseApi.deleteWeatherFromDb(weatherToDeleteId)
+      .then(() => {
+        getAllWeatherEvent();
+      })
+      .catch((error) => {
+        console.error('error from delete weather', error);
+      });
   });
 };
 
@@ -93,6 +101,7 @@ const initializer = () => {
   oneDayButtonEvent();
   fiveDayButtonEvent();
   saveWeatherEvent();
+  deleteWeatherFromFirebase();
 };
 
 module.exports = {
