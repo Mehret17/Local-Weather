@@ -27,8 +27,10 @@ const fiveDayString = (weatherArray) => {
   weatherArray.forEach((weather, index) => {
     console.log('index:',index);
     if (index % 8 === 0) {
-      fiveDayStrang += `<div class="col-sm-2">`;
-      fiveDayStrang +=   `<div class='thumbnail forecast">`;
+      fiveDayStrang += `<div class="container">`;
+      fiveDayStrang += `<div class="row text-center">`;
+      fiveDayStrang += `<div class="col-xs-6 col-md-3>`;
+      fiveDayStrang += `<div class='thumbnail forecast">`;
       fiveDayStrang +=    `<h4 class ="temperature">Temperature: ${weather.main.temp} °F</h4>`;
       fiveDayStrang +=    `<h3 class ="description">${weather.weather[0].description}</h3>`;
       fiveDayStrang +=    `<h3 class ="pressure">${weather.main.pressure} mp</h3>`;
@@ -36,6 +38,7 @@ const fiveDayString = (weatherArray) => {
       // fiveDayStrang +=   `<h2>${weather.city.name}</h2>`;
       fiveDayStrang +=    `<a class="btn btn-primary saveWeather" role="button">Save</a>`;
       fiveDayStrang +=   `</div>`;
+      fiveDayStrang += `</div>`;
       fiveDayStrang += `</div>`;
     };
   });
@@ -54,8 +57,8 @@ const saveString = (saveWeatherArray) => {
     saveString += `<div class="col-xs-6 col-md-3>`;
     saveString += `<div class='thumbnail forecast" data-firebase-id="${weather.id}">`;
     // fiveDayStrang += `<div class="caption">`;
-    saveString +=   `<h4 class ="temperature">${weather.temp} </h4>`;
-    saveString +=   `<h3 class ="description">${weather.description}</h3>`;
+    saveString +=   `<h4 class ="temperature">${weather.temperature} </h4>`;
+    saveString +=   `<h3 class ="description">${weather.condition}</h3>`;
     saveString +=   `<h3 class ="pressure">${weather.pressure}</h3>`;
     saveString +=   `<h3 class ="windSpeed">${weather.wind} </h3>`;
     saveString +=   `<a class="btn-danger deleteWeather" role="button">Delete</a>`;
