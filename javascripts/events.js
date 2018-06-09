@@ -66,7 +66,7 @@ const saveWeatherEvent = () => {
       condition: weatherToAddCard.find('.description').text(),
       pressure: weatherToAddCard.find('.pressure').text(),
       wind: weatherToAddCard.find('.windSpeed').text(),
-      isScarry: true,
+      isScarry: false,
     };
     firebaseApi.saveWeather(weatherToAdd);
   });
@@ -74,8 +74,8 @@ const saveWeatherEvent = () => {
 
 const getAllWeatherEvent = () => {
   firebaseApi.getAllWeather()
-    .then((weatherArray) => {
-      dom.saveString(weatherArray);
+    .then((saveArray) => {
+      dom.saveString(saveArray);
     })
     .catch((error) => {
       console.error('error in get all weather', error);
@@ -96,12 +96,34 @@ const deleteWeatherFromFirebase = () => {
   });
 };
 
+const updateWeatherEvent = () => {
+  $(document).on('click', '.updateWeatherScarry', (e) => {
+    const weatherToUpdateId = $(e.target).closest('.forecast').data('firebaseId');
+    const weatherToUpdateCard = $(e.target).closest('.forecast');
+    const updateWeather = {
+      temperature: weatherToUpdateCard.find('.temperature').text(),
+      condition: weatherToUpdateCard.find('.description').text(),
+      pressure: weatherToUpdateCard.find('.pressure').text(),
+      wind: weatherToUpdateCard.find('.windSpeed').text(),
+      isScarry: true,
+    };
+    firebaseApi.updateWeatherIsScarryInDb(updateWeather, weatherToUpdateId)
+      .then(() => {
+        getAllWeatherEvent();
+      })
+      .catch((error) => {
+        console.error('error in update movie',error);
+      });
+  });
+};
+
 const initializer = () => {
   myLinks();
   oneDayButtonEvent();
   fiveDayButtonEvent();
   saveWeatherEvent();
   deleteWeatherFromFirebase();
+  updateWeatherEvent();
 };
 
 module.exports = {

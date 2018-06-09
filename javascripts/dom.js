@@ -31,15 +31,13 @@ const fiveDayString = (weatherArray) => {
       fiveDayStrang += `<div class="row text-center">`;
       fiveDayStrang += `<div class="col-xs-6 col-md-3>`;
       fiveDayStrang += `<div class='thumbnail forecast">`;
-      // fiveDayStrang += `<div class="caption">`;
-      fiveDayStrang +=   `<h4 class ="temperature">Temperature: ${weather.main.temp} °F</h4>`;
-      fiveDayStrang +=   `<h3 class ="description">${weather.weather[0].description}</h3>`;
-      fiveDayStrang +=   `<h3 class ="pressure">${weather.main.pressure} mp</h3>`;
-      fiveDayStrang +=   `<h3 class ="windSpeed">${weather.wind.speed}  mph</h3>`;
+      fiveDayStrang +=    `<h4 class ="temperature">Temperature: ${weather.main.temp} °F</h4>`;
+      fiveDayStrang +=    `<h3 class ="description">${weather.weather[0].description}</h3>`;
+      fiveDayStrang +=    `<h3 class ="pressure">${weather.main.pressure} mp</h3>`;
+      fiveDayStrang +=    `<h3 class ="windSpeed">${weather.wind.speed}  mph</h3>`;
       // fiveDayStrang +=   `<h2>${weather.city.name}</h2>`;
-      fiveDayStrang +=   `<a class="btn btn-primary saveWeather" role="button">Save</a>`;
-      fiveDayStrang += `</div>`;
-      fiveDayStrang += `</div>`;
+      fiveDayStrang +=    `<a class="btn btn-primary saveWeather" role="button">Save</a>`;
+      fiveDayStrang +=   `</div>`;
       fiveDayStrang += `</div>`;
       fiveDayStrang += `</div>`;
     };
@@ -51,19 +49,20 @@ const print = (allStringz) => {
   $('#fiveDayForecast').html(allStringz);
 };
 
-const saveString = (weatherArray) => {
+const saveString = (saveWeatherArray) => {
   let saveString = '';
-  weatherArray.forEach((weather) => {
+  saveWeatherArray.forEach((weather) => {
     saveString += `<div class="container">`;
     saveString += `<div class="row text-center">`;
     saveString += `<div class="col-xs-6 col-md-3>`;
     saveString += `<div class='thumbnail forecast" data-firebase-id="${weather.id}">`;
     // fiveDayStrang += `<div class="caption">`;
-    saveString +=   `<h4 class ="temperature">Temperature: ${weather.temp} °F</h4>`;
-    saveString +=   `<h3 class ="description">${weather.description}</h3>`;
-    saveString +=   `<h3 class ="pressure">${weather.pressure} mp</h3>`;
-    saveString +=   `<h3 class ="windSpeed">${weather.wind}  mph</h3>`;
+    saveString +=   `<h4 class ="temperature">${weather.temperature} </h4>`;
+    saveString +=   `<h3 class ="description">${weather.condition}</h3>`;
+    saveString +=   `<h3 class ="pressure">${weather.pressure}</h3>`;
+    saveString +=   `<h3 class ="windSpeed">${weather.wind} </h3>`;
     saveString +=   `<a class="btn-danger deleteWeather" role="button">Delete</a>`;
+    saveString += `<a class="btn btn-primary updateWeatherScarry" role="button">Scarry</a>`;
     // fiveDayStrang +=   `<h2>${weather.city.name}</h2>`;
     saveString += `</div>`;
     saveString += `</div>`;
