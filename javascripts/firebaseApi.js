@@ -32,7 +32,7 @@ const getAllWeather = () => {
     const allWeatherArray = [];
     $.ajax({
       method: 'GET',
-      url: `${firebaseConfig.databaseURL}/weather.json??orderBy="uid"&equalTo="${uid}"`,
+      url: `${firebaseConfig.databaseURL}/weather.json?orderBy="uid"&equalTo="${uid}"`,
     })
       .done((allWeatherObj) => {
         if (allWeatherObj !== null) {
