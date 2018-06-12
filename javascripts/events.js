@@ -66,7 +66,7 @@ const saveWeatherEvent = () => {
       condition: weatherToAddCard.find('.description').text(),
       pressure: weatherToAddCard.find('.pressure').text(),
       wind: weatherToAddCard.find('.windSpeed').text(),
-      isScarry: false,
+      isScary: false,
     };
     firebaseApi.saveWeather(weatherToAdd);
   });
@@ -97,7 +97,7 @@ const deleteWeatherFromFirebase = () => {
 };
 
 const updateWeatherEvent = () => {
-  $(document).on('click', '.updateWeatherScarry', (e) => {
+  $(document).on('click', '.updateWeatherScary', (e) => {
     const weatherToUpdateId = $(e.target).closest('.forecast').data('firebaseId');
     const weatherToUpdateCard = $(e.target).closest('.forecast');
     const updateWeather = {
@@ -105,7 +105,7 @@ const updateWeatherEvent = () => {
       condition: weatherToUpdateCard.find('.description').text(),
       pressure: weatherToUpdateCard.find('.pressure').text(),
       wind: weatherToUpdateCard.find('.windSpeed').text(),
-      isScarry: true,
+      isScary: true,
     };
     firebaseApi.updateWeatherIsScarryInDb(updateWeather, weatherToUpdateId)
       .then(() => {
@@ -124,28 +124,29 @@ const authEvents = () => {
     const password = $('#inputPassword').val();
     firebase.auth().signInWithEmailAndPassword(email, password)
       .catch((error) => {
+        $('#singin-error-msg').text(error.message);
+        $('#signin-error').removeClass('hide');
         const errorMessage = error.message;
         console.error(errorMessage);
       });
   });
-
   $('#register-btn').click(() => {
-    const email = $('registerEmail').val();
+    const email = $('#registerEmail').val();
     const password = $('#registerPassword').val();
     firebase.auth().createUserWithEmailAndPassword(email, password).catch((error) => {
+      $('#register-error-msg').text(error.message);
+      $('#register-error').removeClass('hide');
       const errorMessage = error.message;
       console.error(errorMessage);
     });
   });
-
   $('#register-link').click(() => {
     $('#login-form').addClass('hide');
-    $('#register-link').removeClass('.hide');
+    $('#register-form').removeClass('hide');
   });
-
   $('#signin-link').click(() => {
     $('#login-form').removeClass('hide');
-    $('#registration-form').addClass('hide');
+    $('#register-form').addClass('hide');
   });
   $('#logout').click(() => {
     firebase.auth().signOut().then(() => {
